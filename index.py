@@ -1,7 +1,10 @@
 from svgelements import SVG, Path, Move, Line, CubicBezier, Curve
-# bezier curve equation: 
+# bezier quadratic curve equation: 
 #   x = ((1 - t)^2)(x1) + 2(t - 1)t(x2) + (t^2)(x3)
 #   y = ((1 - t)^2)(y1) + 2(t - 1)t(y2) + (t^2)(y3)
+# bezier cubic curve equation:
+#   x = (1 - t)^3(x1) + 3(1 - t)^2(tx2) + 3(1 - t)t^2(tx2) + t^3(x3)
+#   y = (1 - t)^3(y1) + 3(1 - t)^2(ty2) + 3(1 - t)t^2(ty2) + t^3(y3)
 
 # center of mass = average(x,y) -> shift each coordinate by average(x,y)
 
@@ -21,14 +24,15 @@ svg = SVG.parse('shape.svg')
 for element in svg.elements():
     # Check if the element is a Path and has a 'd' attribute
     if isinstance(element, Path):
-        for e, i in enumerate(element.segments()):
-            segment = element.segments()[e]
+        for i, e in enumerate(element.segments()):
+            segment = element.segments()[i]
             if isinstance(segment, Move):
-                print(f'Segment {i}: "M" - Move to {segment.end}')
+                print(f'Segment {e}')
             elif isinstance(segment, Line):
-                print(f'Segment {i}: "L" - Line to {segment.end}')
+                print(f'Segment {e}')
             elif isinstance(segment, CubicBezier):
-                print(f'Segment {i}: "C" - Cubic to {segment.end}')
+                print(f'Segment {e}: "C" - Cubic to {segment.end}')
+            print('type', type(e))
         # for i in range(len(element.segments())):
         #     for i in range(len(path)):
         #         print(path[i])
