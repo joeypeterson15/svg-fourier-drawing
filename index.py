@@ -14,26 +14,30 @@ from svgelements import SVG, Path, Move, Line, CubicBezier, Curve
     # 4. iterate through the number of samples/iterations (1000 for example).
     # 5. find the fourier coefficients for each sample/iteration(1000 for example). 
     #    this means all the coefficients calculated from the fourier series will be from 0 < 2pi / 1000
-
-def getBezierCurve(x, y, c = None):
-    return 0
-
+svgPaths = []
+# def getCubicBezier(segment):
+    # path = 
+# def getQuadraticBezier(segment):
+#     return None
+# def getLine(segment):
+#     return None
+    
 svg = SVG.parse('shape.svg')
-
 # Iterate through all elements in the SVG
 for element in svg.elements():
     # Check if the element is a Path and has a 'd' attribute
     if isinstance(element, Path):
         for i, e in enumerate(element.segments()):
             segment = element.segments()[i]
-            if isinstance(segment, Move):
-                print(f'Segment {e}')
-            elif isinstance(segment, Line):
-                print(f'Segment {e}')
-            elif isinstance(segment, CubicBezier):
-                print(f'Segment {e}: "C" - Cubic to {segment.end}')
-            print('type', type(e))
-        # for i in range(len(element.segments())):
-        #     for i in range(len(path)):
-        #         print(path[i])
-            # print(f'Segment: {segment}')
+            # if isinstance(segment, Move):
+            #     print(f'Segment {e}')
+            # elif isinstance(segment, CubicBezier):
+            #     print(f'Segment {e}')
+            if isinstance(segment, CubicBezier):
+                # print(f'Segment {e}')
+                print(f'start: {e.start}')
+                print(f'end: {e.end}')
+                print(f'control1: {e.control1}')
+                print(f'control2: {e.control2}')
+                # cube = getCubicBezier(e)
+                print('cube:', cube)
